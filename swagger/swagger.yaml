@@ -1,0 +1,770 @@
+openapi: 3.0.3
+info:
+  title: API Dokumentasi
+  description: |-
+    Ini adalah dokumentasi API untuk aplikasi System Bank. Dokumentasi ini mencakup endpoint-endpoint yang tersedia untuk mengelola nasabah, mother nasabah, akun, tipe akun, alamat, tipe alamat, transaksi, tipe transaksi, dan autentikasi.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Server lokal untuk pengembangan
+tags:
+  - name: Nasabah
+    description: Endpoints untuk mengelola nasabah
+  - name: Mother Nasabah
+    description: Endpoints untuk mengelola Mother Nasabah
+  - name: Account
+    description: Endpoints untuk mengelola akun
+  - name: Account Type
+    description: Endpoints untuk mengelola tipe akun
+  - name: Address
+    description: Endpoints untuk mengelola alamat
+  - name: Address Type
+    description: Endpoints untuk mengelola tipe alamat
+  - name: Transaction
+    description: Endpoints untuk mengelola transaksi
+  - name: Transaction Type
+    description: Endpoints untuk mengelola tipe transaksi
+  - name: Auth
+    description: Endpoints untuk autentikasi pengguna
+paths:
+  /nasabah:
+    get:
+      tags:
+        - Nasabah
+      summary: Ambil semua nasabah
+      operationId: getNasabahs
+      responses:
+        '200':
+          description: Daftar nasabah berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Nasabah'
+    post:
+      tags:
+        - Nasabah
+      summary: Buat nasabah baru
+      operationId: createNasabah
+      requestBody:
+        description: Data nasabah yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nasabah'
+        required: true
+      responses:
+        '201':
+          description: Nasabah berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nasabah'
+  /nasabah/{id}:
+    put:
+      tags:
+        - Nasabah
+      summary: Perbarui nasabah berdasarkan ID
+      operationId: updateNasabah
+      parameters:
+        - name: id
+          in: path
+          description: ID nasabah yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data nasabah yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nasabah'
+        required: true
+      responses:
+        '200':
+          description: Nasabah berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nasabah'
+    delete:
+      tags:
+        - Nasabah
+      summary: Hapus nasabah berdasarkan ID
+      operationId: deleteNasabah
+      parameters:
+        - name: id
+          in: path
+          description: ID nasabah yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Nasabah berhasil dihapus
+  /mother-nasabah:
+    get:
+      tags:
+        - Mother Nasabah
+      summary: Ambil semua mother nasabah
+      operationId: getMotherNasabahs
+      responses:
+        '200':
+          description: Daftar mother nasabah berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MotherNasabah'
+    post:
+      tags:
+        - Mother Nasabah
+      summary: Buat mother nasabah baru
+      operationId: createMotherNasabah
+      requestBody:
+        description: Data mother nasabah yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MotherNasabah'
+        required: true
+      responses:
+        '201':
+          description: Mother nasabah berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MotherNasabah'
+  /mother-nasabah/{id}:
+    put:
+      tags:
+        - Mother Nasabah
+      summary: Perbarui mother nasabah berdasarkan ID
+      operationId: updateMotherNasabah
+      parameters:
+        - name: id
+          in: path
+          description: ID mother nasabah yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data mother nasabah yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MotherNasabah'
+        required: true
+      responses:
+        '200':
+          description: Mother nasabah berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MotherNasabah'
+    delete:
+      tags:
+        - Mother Nasabah
+      summary: Hapus mother nasabah berdasarkan ID
+      operationId: deleteMotherNasabah
+      parameters:
+        - name: id
+          in: path
+          description: ID mother nasabah yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Mother nasabah berhasil dihapus
+  /account:
+    get:
+      tags:
+        - Account
+      summary: Ambil semua akun
+      operationId: getAccounts
+      responses:
+        '200':
+          description: Daftar akun berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+    post:
+      tags:
+        - Account
+      summary: Buat akun baru
+      operationId: createAccount
+      requestBody:
+        description: Data akun yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        '201':
+          description: Akun berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /account/{id}:
+    put:
+      tags:
+        - Account
+      summary: Perbarui akun berdasarkan ID
+      operationId: updateAccount
+      parameters:
+        - name: id
+          in: path
+          description: ID akun yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data akun yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        '200':
+          description: Akun berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+    delete:
+      tags:
+        - Account
+      summary: Hapus akun berdasarkan ID
+      operationId: deleteAccount
+      parameters:
+        - name: id
+          in: path
+          description: ID akun yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Akun berhasil dihapus
+  /account-type:
+    get:
+      tags:
+        - Account Type
+      summary: Ambil semua tipe akun
+      operationId: getAccountTypes
+      responses:
+        '200':
+          description: Daftar tipe akun berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountType'
+    post:
+      tags:
+        - Account Type
+      summary: Buat tipe akun baru
+      operationId: createAccountType
+      requestBody:
+        description: Data tipe akun yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountType'
+        required: true
+      responses:
+        '201':
+          description: Tipe akun berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountType'
+  /account-type/{id}:
+    put:
+      tags:
+        - Account Type
+      summary: Perbarui tipe akun berdasarkan ID
+      operationId: updateAccountType
+      parameters:
+        - name: id
+          in: path
+          description: ID tipe akun yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data tipe akun yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountType'
+        required: true
+      responses:
+        '200':
+          description: Tipe akun berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountType'
+    delete:
+      tags:
+        - Account Type
+      summary: Hapus tipe akun berdasarkan ID
+      operationId: deleteAccountType
+      parameters:
+        - name: id
+          in: path
+          description: ID tipe akun yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Tipe akun berhasil dihapus
+  /address:
+    get:
+      tags:
+        - Address
+      summary: Ambil semua alamat
+      operationId: getAddresses
+      responses:
+        '200':
+          description: Daftar alamat berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+    post:
+      tags:
+        - Address
+      summary: Buat alamat baru
+      operationId: createAddress
+      requestBody:
+        description: Data alamat yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        '201':
+          description: Alamat berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+  /address/{id}:
+    put:
+      tags:
+        - Address
+      summary: Perbarui alamat berdasarkan ID
+      operationId: updateAddress
+      parameters:
+        - name: id
+          in: path
+          description: ID alamat yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data alamat yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        '200':
+          description: Alamat berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+    delete:
+      tags:
+        - Address
+      summary: Hapus alamat berdasarkan ID
+      operationId: deleteAddress
+      parameters:
+        - name: id
+          in: path
+          description: ID alamat yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Alamat berhasil dihapus
+  /address-type:
+    get:
+      tags:
+        - Address Type
+      summary: Ambil semua tipe alamat
+      operationId: getAddressTypes
+      responses:
+        '200':
+          description: Daftar tipe alamat berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddressType'
+    post:
+      tags:
+        - Address Type
+      summary: Buat tipe alamat baru
+      operationId: createAddressType
+      requestBody:
+        description: Data tipe alamat yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressType'
+        required: true
+      responses:
+        '201':
+          description: Tipe alamat berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressType'
+  /address-type/{id}:
+    put:
+      tags:
+        - Address Type
+      summary: Perbarui tipe alamat berdasarkan ID
+      operationId: updateAddressType
+      parameters:
+        - name: id
+          in: path
+          description: ID tipe alamat yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data tipe alamat yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressType'
+        required: true
+      responses:
+        '200':
+          description: Tipe alamat berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressType'
+    delete:
+      tags:
+        - Address Type
+      summary: Hapus tipe alamat berdasarkan ID
+      operationId: deleteAddressType
+      parameters:
+        - name: id
+          in: path
+          description: ID tipe alamat yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Tipe alamat berhasil dihapus
+  /transaction:
+    get:
+      tags:
+        - Transaction
+      summary: Ambil semua transaksi
+      operationId: getTransactions
+      responses:
+        '200':
+          description: Daftar transaksi berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+    post:
+      tags:
+        - Transaction
+      summary: Buat transaksi baru
+      operationId: createTransaction
+      requestBody:
+        description: Data transaksi yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+        required: true
+      responses:
+        '201':
+          description: Transaksi berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+  /transaction/{id}:
+    put:
+      tags:
+        - Transaction
+      summary: Perbarui transaksi berdasarkan ID
+      operationId: updateTransaction
+      parameters:
+        - name: id
+          in: path
+          description: ID transaksi yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data transaksi yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+        required: true
+      responses:
+        '200':
+          description: Transaksi berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+    delete:
+      tags:
+        - Transaction
+      summary: Hapus transaksi berdasarkan ID
+      operationId: deleteTransaction
+      parameters:
+        - name: id
+          in: path
+          description: ID transaksi yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Transaksi berhasil dihapus
+  /transaction-type:
+    get:
+      tags:
+        - Transaction Type
+      summary: Ambil semua tipe transaksi
+      operationId: getTransactionTypes
+      responses:
+        '200':
+          description: Daftar tipe transaksi berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TransactionType'
+    post:
+      tags:
+        - Transaction Type
+      summary: Buat tipe transaksi baru
+      operationId: createTransactionType
+      requestBody:
+        description: Data tipe transaksi yang akan dibuat
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionType'
+        required: true
+      responses:
+        '201':
+          description: Tipe transaksi berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionType'
+  /transaction-type/{id}:
+    put:
+      tags:
+        - Transaction Type
+      summary: Perbarui tipe transaksi berdasarkan ID
+      operationId: updateTransactionType
+      parameters:
+        - name: id
+          in: path
+          description: ID tipe transaksi yang akan diperbarui
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Data tipe transaksi yang akan diperbarui
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionType'
+        required: true
+      responses:
+        '200':
+          description: Tipe transaksi berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionType'
+    delete:
+      tags:
+        - Transaction Type
+      summary: Hapus tipe transaksi berdasarkan ID
+      operationId: deleteTransactionType
+      parameters:
+        - name: id
+          in: path
+          description: ID tipe transaksi yang akan dihapus
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Tipe transaksi berhasil dihapus
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: Login pengguna
+      operationId: loginUser
+      requestBody:
+        description: Data login pengguna
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        '200':
+          description: Berhasil login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Kredensial tidak valid
+  /logout:
+    post:
+      tags:
+        - Auth
+      summary: Logout pengguna
+      operationId: logoutUser
+      responses:
+        '204':
+          description: Berhasil logout
+components:
+  schemas:
+    Nasabah:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          email:
+            type: string
+          phone:
+            type: string
+          addressId:
+            type: string
+          typeId:
+            type: string
+    MotherNasabah:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        parentId:
+          type: string
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        typeId:
+          type: string
+    AccountType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Address:
+      type: object
+      properties:
+        id:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zip:
+          type: string
+        typeId:
+          type: string
+    AddressType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+          format: float
+        date:
+          type: string
+          format: date
+        typeId:
+          type: string
+    TransactionType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        refreshToken:
+          type: string

@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model nasabah {
+  id              Int       @id @default(autoincrement())
+  nik             String
+  name            String
+  place_of_birth  String
+  religion        String
+  birth           DateTime
+  gender          String
+  email           String  @unique
+  password        String
+  phone           String
+
+  address         address[]
+  account         account[]
+  mother_nasabah  mother_nasabah?
+}
+
+model mother_nasabah {
+  id Int @id @default(autoincrement())
+  nasabahId Int @unique
+  name String
+  birth DateTime
+
+  nasabah nasabah @relation(fields: [nasabahId], references: [id])
+}
+
+model address_type {
+  id Int @id @default(autoincrement())
+  name String
+
+  addresses address[]
+}
+
+model address {
+  id Int @id @default(autoincrement())
+  nasabahId Int
+  typeAddId Int
+  rt Int
+  rw Int
+  village String
+  subdistrict String
+  zip_code String
+
+  nasabah nasabah @relation(fields: [nasabahId], references: [id])
+  address_type address_type @relation(fields: [typeAddId], references: [id])
+}
+
+model account_type {
+  id Int @id @default(autoincrement())
+  name String
+
+  accounts account[]
+}
+
+model account {
+  id Int @id @default(autoincrement())
+  nasabahId Int
+  typeAccId Int
+  balance Int
+  status Boolean
+
+  account_type account_type @relation(fields: [typeAccId], references: [id])
+  nasabah nasabah @relation(fields: [nasabahId], references: [id])
+  transactions transaction[]
+}
+
+model transaction_type {
+  id Int @id @default(autoincrement())
+  name String
+
+  transactions transaction[]
+}
+
+model transaction {
+  id Int @id @default(autoincrement())
+  accId Int
+  transactionTypeId Int
+  amount Int
+  transactionDate DateTime
+  description String
+
+  transaction_type transaction_type @relation(fields: [transactionTypeId], references: [id])
+  account account @relation(fields: [accId], references: [id])
+}
